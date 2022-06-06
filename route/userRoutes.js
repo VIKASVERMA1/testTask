@@ -77,5 +77,9 @@ router.post('/status',userController.givingStatus);
 
 router.get('/seeUsers/:id',userController.seeUsers)
 
+//--------route for get all users task by admin-----
+
+router.get('/adminSeeTask/:id',userController.adminGetTasks)
+
 
 module.exports=router

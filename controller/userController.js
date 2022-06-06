@@ -95,7 +95,7 @@ const userLogin = async (req, res) => {
     const isMatch = await bcrypt.compare(pass, userdata.password);
     if (isMatch) {
       const data1 = await userdatas.findOne({
-        where: { userName: name }, // Your filters here
+        where: { userName: name },
       });
       let date = new Date();
       const token = jwt.sign(
@@ -385,6 +385,7 @@ const assignTask = async (req, res) => {
   }
 };
 
+
 // //see user assigned task
 const getAssignedTask = async (req, res) => {
   const manager = await userdatas.findOne({
@@ -409,6 +410,33 @@ const getAssignedTask = async (req, res) => {
     res.send("you are not able to see the task");
   }
 };
+
+//admin can see user task by user.id
+
+const adminGetTasks = async (req, res) => {
+  const admin = await userdatas.findOne({
+    where: { id: req.params.id },
+  });
+  if (admin.role_Id == 1) {
+    let userdata = await userdatas.findAll({
+      include: [
+        {
+          model: userTask,
+          as: "addTask",
+        },
+        {
+          model: rolesData,
+          as: "role",
+        },
+      ],
+      where: { id: req.body.id },
+    });
+    res.status(200).send(userdata);
+  } else {
+    res.send("you are not able to see the task");
+  }
+};
+
 
 //giving rating to users for their task work
 
@@ -472,4 +500,5 @@ module.exports = {
   givingStatus,
   assignUser,
   seeUsers,
+  adminGetTasks
 };
