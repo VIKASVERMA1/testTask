@@ -1,22 +1,35 @@
-const express=require('express')
-const app=express()
-require('./dbConnection')
-const bodyParser = require('body-parser')
-require("./route/userRoutes")
+const express = require("express");
+const app = express();
+require("./db");
+const bodyParser = require("body-parser");
+require("./route/user_routes");
+require("./route/admin_routes");
+require("./route/manager_routes");
 
-
-PORT=3009
+PORT = 3009;
 
 app.use(express.json());
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//router
+//user_router
 
-const router=require('./route/userRoutes')
+const user = require("./route/user_routes");
 
-app.use('/user',router)
+app.use("/user", user);
 
-app.listen(PORT,()=>{
-    console.log(`your server is runnig on port ${PORT}`);
-})
+//admin_router
+
+const admin = require("./route/admin_routes");
+
+app.use("/admin", admin);
+
+//manager_router
+
+const manager = require("./route/manager_routes");
+
+app.use("/manager", manager);
+
+app.listen(PORT, () => {
+  console.log(`your server is runnig on port ${PORT}`);
+});

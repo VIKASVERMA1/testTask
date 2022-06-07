@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = require("../dbConnection");
-const userData=require("../models/userSchema")
+const sequelize = require("../db");
+const userData=require("./user_schema")
 const userTask = sequelize.define("addTask", {
   task_Id: {
     type: DataTypes.INTEGER,
