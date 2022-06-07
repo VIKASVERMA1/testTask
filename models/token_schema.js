@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = require("../dbConnection");
+const sequelize = require("../db");
 const updateToken = sequelize.define("token", {
   update_token: {
     type: DataTypes.STRING,

@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = require("../dbConnection");
+const sequelize = require("../db");
 // const userTask=require("../models/task")
 const userData = sequelize.define("AdminData", {
   firstName: {
@@ -13,6 +13,7 @@ const userData = sequelize.define("AdminData", {
   userName: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique:true
   },
   role_Id: {
     type: DataTypes.INTEGER,
@@ -21,6 +22,7 @@ const userData = sequelize.define("AdminData", {
   email_id: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique:true
   },
   password: {
     type: DataTypes.STRING,
